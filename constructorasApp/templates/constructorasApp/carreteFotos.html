@@ -1,0 +1,11 @@
+{% extends 'baseForm.html' %}
+{% load static %}
+{% block content%}
+
+{% for img in fotos.imagen.all %}
+<img class="d-block w-100" src="{% static img.imagen.url %}"  alt="First slide">
+{% endfor %}
+
+         
+                
+{% endblock  %}

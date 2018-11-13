@@ -1,0 +1,40 @@
+{% extends 'baseForm.html' %}
+{% load static %}
+{% block content%}
+
+    <section class="bg-light" >
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-12 text-center">
+                  <h2 class="section-heading text-uppercase">Lista de edificios</h2>
+                </div>
+              </div>
+              
+              <div class="row well">
+              {% for e in object.edificios.all %}
+              <div class="col-md-4 well">
+                <div class="card" style="width: 18rem;">
+
+                    <img class="card-img-top" src="{% static e.imagen.url %}" style="width:287px;height:300px" alt="Card image cap">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{e.nombre}}</h5>
+                        <p class="card-text">{{e.descripcion}}</p>
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cantidad de apartamentos: <strong>{{ e.numero_de_apartamentos}}</strong></li>
+                    </ul>
+
+                    <div class="card-body">
+                        <a href="{% url 'apartamentos-lista' e.pk %}" class="btn btn-info">Ver apartamentos</a>
+                    </div>
+    
+                </div>
+              </div>        
+              {% endfor %}
+            </div>
+             
+          </section>
+
+{% endblock  %}

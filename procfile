@@ -1,0 +1,1 @@
+web: gunicorn Constructoras.wsgi --log-file -
