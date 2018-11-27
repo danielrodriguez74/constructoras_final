@@ -1,11 +1,39 @@
 {% extends 'adminlte/base.html' %}
+{% load static %}
 
 {% block content %}
-
-{% for constructora in object_list %}
-
-<h1>{{constructora}}</h1>
-
-{% endfor %}
-
+<div class="container">
+    <div class="page-header text-center">
+        <h1>Listado de constructoras</h1>
+    </div>
+    <a href="{% url 'constructora-create' %}" class="btn btn-success btn-rounded"><i class="fa fa-plus-circle"></i> Agregar constructora</a>
+    <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Imágen</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for constructora in object_list %}
+            <tr>
+                <td>{{ constructora.nombre }}</td>
+                <td>{{ constructora.direccion }}</td>
+                <td>{{ constructora.telefono }}</td>
+                <td><img src="{% static constructora.imagen.url %}" style="max-width:100px;"></td>
+                <td>
+                    <a class="btn btn-success" href="{% url 'constructora-update' constructora.pk %}"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" href="{% url 'constructora-delete' constructora.pk %}"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
 {% endblock content %}

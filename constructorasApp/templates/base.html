@@ -112,7 +112,7 @@
         
         <div class="row">
 
-            {% for p in constructoras_list.all %}
+            {% for p in constructoras_list %}
            
           <div class="col-md-4 col-sm-6 portfolio-item">
               <div class="portfolio-hover">
@@ -123,7 +123,7 @@
             <div class="portfolio-caption">
               <h4>{{p.nombre}}</h4>
               <p class="text-muted">Telefono: {{p.telefono}}</p>
-              <a class="btn btn-success" href="{% url 'edificios-lista' p.pk %}" method="post">Ver edificios</a>
+              <a class="btn btn-success" href="{% url 'edificio-lista' p.pk %}" method="post">Ver edificios</a>
             </div>
         </div>
 

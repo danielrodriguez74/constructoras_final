@@ -3,14 +3,9 @@ from .models import *
 
 class ImagenesInLine(admin.TabularInline):
     model = Apartamento.imagen.through
-    
-
-#class Historia_medicaAdmin(admin.ModelAdmin):
-#    inlines = [HistoriaAperturaAdultosInLine,]
 
 class EdificioAdmin(admin.ModelAdmin):
     inlines = [ImagenesInLine,]
-
     exclude = ()
 
 

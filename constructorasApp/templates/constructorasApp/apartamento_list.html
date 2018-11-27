@@ -1,0 +1,52 @@
+{% extends 'adminlte/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header text-center">
+        <h1>Listado de apartamentos</h1>
+    </div>
+    <a href="{% url 'apartamento-create' %}" class="btn btn-success btn-rounded"><i class="fa fa-plus-circle"></i> Agregar apartamento</a>
+    <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Pertenece al Edificio</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Número</th>
+                <th scope="col">Cant. Alcobas</th> 
+                <th scope="col">Cant. Baños</th>    
+                <th scope="col">Tiene Garaje</th>                      
+                <th scope="col">Tiene Terraza</th>
+                <th scope="col">Tiene Comedor</th>
+                <th scope="col">Tiene Cocina</th>
+                <th scope="col">Estado Disponibilidad</th>  
+                <th scope="col">Descripción</th>            
+            </tr>
+        </thead>
+        <tbody>
+            {% for apartamento in object_list %}
+            <tr>
+                <td>{{ apartamento.edificio }}</td>
+                <td>{{ apartamento.nombre }}</td>
+                <td>{{ apartamento.numero }}</td>
+                <td>{{ apartamento.alcobas }}</td>
+                <td>{{ apartamento.baño }}</td>     
+                <td>{{ apartamento.garaje }}"></td>     
+                <td>{{ apartamento.terraza }}"></td>
+                <td>{{ apartamento.comedor }}"></td>
+                <td>{{ apartamento.cocina }}"></td>
+                <td>{{ apartamento.estado }}</td>
+                <td>{{ apartamento.descripcion_general }}</td>
+                <td>                    
+                    <a class="btn btn-success" href="{% url 'apartamento-update' apartamento.pk %}"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" href="{% url 'apartamento-delete' apartamento.pk %}"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+{% endblock content %}

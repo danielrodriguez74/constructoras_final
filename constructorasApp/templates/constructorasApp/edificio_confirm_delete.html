@@ -1,0 +1,23 @@
+{% extends 'adminlte/base.html' %}
+{% load static %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="container text-center">
+        <div class="row">
+            <h1>¿Está seguro que desea eliminar la edificio {{ object.nombre }}</h1>
+        </div>
+        <hr>
+        <div class="row">
+            <img src="{% static object.imagen.url %}" alt="Fotografia {{ object.nombre }}" style="max-width:250px;">
+        </div>
+        <hr>
+        <div class="row">
+            <input class="btn btn-danger" type="submit" value="Confirmar" />
+            <a class='btn btn-primary' href="{% url 'edificios-lista' %}">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

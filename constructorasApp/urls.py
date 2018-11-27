@@ -1,26 +1,21 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from constructorasApp import views
+from rest_framework import routers
 
+router = routers.DefaultRouter()
+router.register('constructora_rest', views.ConstructoraViewSet)
+router.register('edificio_rest', views.EdificioViewSet)
+router.register('apartamento_rest', views.ApartamentoViewSet)
 
 urlpatterns = [
-	
+	path('api/', include(router.urls)),
     path('',views.constructoras_base,name='constructora-lista'),
     path('fotos/<int:pk>/',views.carrete_detail,name='fotos-lista'),
     path('ingreso', views.ingreso, name='ingreso'),
 
-    # path('edificios/<int:id>/',views.edificos_detail,name='edificio-lista'),
-    # path('apartamentos/<int:pk>/',views.apartamentos_detail,name='apartamento-lista'),
-    # path('crear_contructora', views.constructora-create, name='contructora-create'),
-    # path('crear_edificio', views.edificio-create, name='edificio-create'),
-    # path('crear_apartamento', views.apartamento-create, name='apartamento-create'),
-
-
-
-
-
-
-
+    path('edificios/<int:id>/',views.edificios_detail,name='edificio-lista'),
+    path('apartamentos/<int:pk>/',views.apartamentos_detail,name='apartamento-lista'),
 
     # --------------------------- CONSTRUCTORA ---------------------------------
 
@@ -42,10 +37,10 @@ urlpatterns = [
     # --------------------------- EDIFICIO ---------------------------------
 
     # List
-    path('edificios/<int:pk>', views.EdificioList.as_view(), name='edificios-lista'),
+    path('edificios/', views.EdificioList.as_view(), name='edificios-lista'),
 
     # Filter edificios
-    path('edificios/<int:grado_id>/lista', views.edificioListFilter, name='edificio-filter-lista'),
+    path('edificios/<int:constructora_id>/lista', views.edificioListFilter, name='edificio-filter-lista'),
     
     # Create
     path('edificios/create/', views.EdificioCreate.as_view(), name='edificio-create'),
@@ -63,10 +58,10 @@ urlpatterns = [
     # --------------------------- APARTAMENTO ---------------------------------
 
     # List
-    path('apartamentos/<int:pk>', views.ApartamentoList.as_view(), name='apartamentos-lista'),
+    path('apartamentos/', views.ApartamentoList.as_view(), name='apartamentos-lista'),
 
     # Filter apartamentos
-    path('apartamento/<int:grado_id>/lista', views.apartamentoListFilter, name='apartamento-filter-lista'),
+    path('apartamento/<int:edificio_id>/lista', views.apartamentoListFilter, name='apartamento-filter-lista'),
     
     # Create
     path('apartamento/create/', views.ApartamentoCreate.as_view(), name='apartamento-create'),

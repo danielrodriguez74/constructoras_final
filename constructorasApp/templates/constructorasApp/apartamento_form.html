@@ -1,0 +1,20 @@
+{% extends 'adminlte/base.html' %}
+{% block content %}
+<div class="container">
+    <h1>Agregar nuevo apartamento</h1>
+    <table class="table table-bordered">
+
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {% for p in form %}
+            <tr>
+                <td>{{p.label}}</td>
+                <td>{{p}}</td>
+            </tr>
+            {% endfor %}
+    </table>
+    <button class="btn btn-success" href="{% url 'apartamentos-lista' %}">Guardar</button>
+    <a class="btn btn-primary" href="{% url 'apartamentos-lista' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock content%}

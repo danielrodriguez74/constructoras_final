@@ -1,0 +1,51 @@
+{% extends 'adminlte/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header text-center">
+        {% for constructora in constructora_data %}
+        <h1>Listado de edificios de la constructora {{constructora}}</h1>
+        {% endfor %}
+
+    </div>
+</div>
+<a href="{% url 'edificio-create' %}" class="btn btn-success btn-rounded"><i class="fa fa-plus-circle"></i> Agregar edificio</a>
+<hr>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Identificación</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Seguro</th>
+            <th scope="col">Fotografia</th>
+            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col">Email</th>
+            <th scope="col">Grado</th>
+            <th scope="col">Horario</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for edificio in edificios_data %}
+        <tr>
+            <td>{{ edificio }}</td>
+            <td>{{ edificio }} {{ edificio.apellido }}</td>
+            <td>{{ edificio }}</td>
+            <td><img class="img-responsive" src="{% static edificio.imagen.url %}" style="max-width:70px;"></td>
+            <td>{{ edificio }}</td>
+            <td>{{ edificio }}</td>
+            <td>{{ edificio }}</td>
+            <td><img class="img-responsive" src="{% static edificio.imagen.url %}" style="max-width:70px;"></td>
+            <td>
+                <a class="btn btn-primary" href="{% url 'edificio-detail' edificio.pk %}"><i class="fa fa-eye"></i></a>
+                <a class="btn btn-success" href="{% url 'edificio-update' edificio.pk %}"><i class="fa fa-edit"></i></a>
+                <a class="btn btn-danger" href="{% url 'edificio-delete' edificio.pk %}"><i class="fa fa-trash"></i></a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock content %}

@@ -33,6 +33,17 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'django_adminlte',
     'django_adminlte_theme',
+
+    #app autenticación
+    'django.contrib.sites',
+    'registration',
+
+    'rest_framework',
+
+    #Autenticación google
+    'social_django',
+    'social.apps.django_app.default',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'Constructoras.urls'
@@ -57,7 +70,7 @@ ROOT_URLCONF = 'Constructoras.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates/'],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,6 +78,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -77,19 +93,19 @@ WSGI_APPLICATION = 'Constructoras.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    #'default': {
+    #   'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #}
 
-     #'default': {
-      #  'ENGINE': 'django.db.backends.postgresql',
-       # 'NAME': 'Constructoras',
-        #'USER': 'postgres',
-        #'PASSWORD':'',
-        #'HOST':'localhost',
-        #'PORT':''
-   # }
+    'default': {
+      'ENGINE': 'django.db.backends.postgresql_psycopg2',
+      'NAME': 'Constructoras',
+      'USER': 'daniel',
+      'PASSWORD':'danielSQL',
+      'HOST':'localhost',
+      'PORT':'5432'
+   }
 }
 
 
@@ -129,16 +145,44 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/constructorasApp/static/contructorasApp/'
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join("C:/Construtoras/Constructoras/constructorasApp/",'static'),
-)
+# STATIC_URL = '/constructorasApp/static/contructorasApp/'
+# STATICFILES_DIRS = (
+#     # Put strings here, like "/home/html/static" or "C:/www/django/static".
+#     # Always use forward slashes, even on Windows.
+#     # Don't forget to use absolute paths, not relative paths.
+#     os.path.join("C:/Construtoras/Constructoras/constructorasApp/",'static'),
+# )
+
+STATIC_URL = '/static/'
 
 MEDIA_ROOT=os.path.join(BASE_DIR,'media/')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'media'),
+) 
+
+TEMPLATE_DIRS = (
+ os.path.join(BASE_DIR, 'templates'),
 )
+
+SITE_ID = 1
+ACCOUNT_ACTIVATION_DAYS = 7 #Numero de dias que tiene el usuario para registrarse
+REGISTRATION_AUTO_LOGIN = True #Automaticamente cuando se registre lo autentique.
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'frameworksumariana@gmail.com'
+EMAIL_HOST_PASSWORD = 'ingsis604'
+EMAIL_PORT =  587
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.OpenIdAuth',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.google.GoogleOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '936118822034-cfr3kt6d21o1enp3sv652jtt7qfs1msp.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xFwUzu_JMslEcR9Mm_bHiScT'

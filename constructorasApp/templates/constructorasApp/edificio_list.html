@@ -1,0 +1,41 @@
+{% extends 'adminlte/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header text-center">
+        <h1>Listado de edificios</h1>
+    </div>
+    <a href="{% url 'edificio-create' %}" class="btn btn-success btn-rounded"><i class="fa fa-plus-circle"></i> Agregar edificio</a>
+    <hr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Constructora</th>
+                <th scope="col">Cantidad apartamentos</th> 
+                <th scope="col">Descripción</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for edificio in object_list %}
+            <tr>
+                <td>{{ edificio.nombre }}</td>
+                <td>{{ edificio.constructora }}</td>
+                <td>{{ edificio.numero_de_apartamentos }}</td>
+                <td>{{ edificio.descripcion }}</td>
+                <td><img src="{% static edificio.imagen.url %}" style="max-width:100px;"></td>
+                <td>
+                    <a class="btn btn-success" href="{% url 'edificio-update' edificio.pk %}"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" href="{% url 'edificio-delete' edificio.pk %}"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+{% endblock content %}

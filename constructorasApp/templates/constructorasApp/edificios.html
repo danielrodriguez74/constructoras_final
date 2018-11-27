@@ -1,5 +1,6 @@
-{% extends 'baseForm.html' %}
+{% extends 'constructorasApp/baseForm.html' %}
 {% load static %}
+
 {% block content%}
 
     <section class="bg-light" >
@@ -11,7 +12,7 @@
               </div>
               
               <div class="row well">
-              {% for e in object.edificios.all %}
+              {% for e in objects %}
               <div class="col-md-4 well">
                 <div class="card" style="width: 18rem;">
 
@@ -27,7 +28,7 @@
                     </ul>
 
                     <div class="card-body">
-                        <a href="{% url 'apartamentos-lista' e.pk %}" class="btn btn-info">Ver apartamentos</a>
+                        <a href="{% url 'apartamento-lista' e.pk %}" class="btn btn-info">Ver apartamentos</a>
                     </div>
     
                 </div>

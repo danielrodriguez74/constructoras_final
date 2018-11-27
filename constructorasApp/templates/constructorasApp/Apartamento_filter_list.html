@@ -1,0 +1,51 @@
+{% extends 'adminlte/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header text-center">
+        {% for edificio in edificio_data %}
+        <h1>Listado de apartamentos del edificio {{edificio}}</h1>
+        {% endfor %}
+
+    </div>
+</div>
+<a href="{% url 'apartamento-create' %}" class="btn btn-success btn-rounded"><i class="fa fa-plus-circle"></i> Agregar apartamento</a>
+<hr>
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Identificación</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Seguro</th>
+            <th scope="col">Fotografia</th>
+            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col">Email</th>
+            <th scope="col">Grado</th>
+            <th scope="col">Horario</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for apartamento in apartamentos_data %}
+        <tr>
+            <td>{{ apartamento }}</td>
+            <td>{{ apartamento }} {{ apartamento.apellido }}</td>
+            <td>{{ apartamento }}</td>
+            <td><img class="img-responsive" src="{% static apartamento.imagen.url %}" style="max-width:70px;"></td>
+            <td>{{ apartamento }}</td>
+            <td>{{ apartamento }}</td>
+            <td>{{ apartamento }}</td>
+            <td><img class="img-responsive" src="{% static apartamento.imagen.url %}" style="max-width:70px;"></td>
+            <td>
+                <a class="btn btn-primary" href="{% url 'apartamento-detail' apartamento.pk %}"><i class="fa fa-eye"></i></a>
+                <a class="btn btn-success" href="{% url 'apartamento-update' apartamento.pk %}"><i class="fa fa-edit"></i></a>
+                <a class="btn btn-danger" href="{% url 'apartamento-delete' apartamento.pk %}"><i class="fa fa-trash"></i></a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock content %}
